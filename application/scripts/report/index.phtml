@@ -1,0 +1,98 @@
+<?php
+    $theme = 'soria';
+    $this->stylesheet($this->baseUrl() . '/js/dijit/themes/' . $theme . '/' . $theme . '.css');
+    $this->stylesheet($this->baseUrl() . '/js/dojox/grid/resources/Grid.css');
+    $this->stylesheet($this->baseUrl() . '/js/dojox/grid/resources/' . $theme . 'Grid.css');
+    $this->stylesheet($this->baseUrl() . '/css/uploader.css');
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Bericht ansehen</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <?php echo $this->stylesheet() . PHP_EOL; ?>
+        <?php echo $this->headScript() . PHP_EOL; ?>
+    </head>
+    <body class="<?php echo $theme; ?>">
+        <div id="title">Little Horizon Bericht Uploader</div>
+        <div id="navi">
+<?php echo $this->partial('common/navi.phtml'); ?>
+        </div>
+        <div id="report-list">
+            <div dojoType="dojo.data.ItemFileReadStore" jsId="savedReports" data="reportsStore"></div>
+            <div id="reportsGrid" jsId="reportsGrid" dojoType="dojox.grid.DataGrid" store="savedReports" structure="gridLayout" queryOptions="{deep:true}" query="{}" rowsPerPage="40" selectionMode="single">
+                <script type="dojo/method" event="onRowDblClick" args="evt">
+                    var items = dijit.byId('reportsGrid').selection.getSelected();
+                    var reportId = items[0]['id'];
+                    var vis = items[0]['visibility'];
+                    window.location.href = '<?php echo $this->url(array(
+                        'controller' => 'report',
+                        'action' => 'show',
+                    ), true); ?>id/' + reportId + '/vis/' + vis + '/';
+                </script>
+            </div>
+            <span dojoType="dijit.form.Button">
+                Ansehen
+                <script type="dojo/method" event="onClick" args="evt">
+                    var items = dijit.byId('reportsGrid').selection.getSelected();
+                    var reportId = items[0]['id'];
+                    var vis = items[0]['visibility'];
+                    window.location.href = '<?php echo $this->url(array(
+                        'controller' => 'report',
+                        'action' => 'show',
+                    ), true); ?>id/' + reportId + '/vis/' + vis + '/';
+                </script>
+            </span>
+        <?php /*
+            <div class="header">
+                <div class="separator"></div>
+                <div class="id">ID</div>
+                <div class="separator"></div>
+                <div class="visibility">Sichtbarkeit</div>
+                <div class="separator"></div>
+                <div class="compression">Kompr.</div>
+                <div class="separator"></div>
+                <div class="size">Größe</div>
+                <div class="separator"></div>
+                <div class="clear"></div>
+            </div>
+<?php echo $this->partialLoop('report/listEntry.phtml', $this->reports); ?>
+        */?>
+        </div>
+        <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
+        <script type="text/javascript">
+        dojo.require("dijit.form.Button");
+        dojo.require("dojox.grid.DataGrid");
+        dojo.require("dojo.data.ItemFileReadStore");
+        var gridLayout = [
+            [
+            {
+                field:"date",
+                name:"Datum",
+                width:"115px"
+            },
+            {
+                field:"title",
+                name:"Betreff",
+                width:"275px"
+            },
+            {
+                field:"size",
+                name:"Größe",
+                width:"75px"
+            },
+            {
+                field:"planet",
+                name:"Planet",
+                width:"175px"
+            }
+            ]];
+        var reportsStore = {
+                identifier: 'id',
+                label: 'title',
+                items: <?php echo $this->jsonEncode($this->reports); ?>
+        };
+        </script>
+    </body>
+</html>

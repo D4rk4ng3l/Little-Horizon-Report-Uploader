@@ -1,0 +1,37 @@
+<?php
+    $this->stylesheet($this->baseUrl() . '/css/uploader.css');
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Bericht hochladen</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <?php echo $this->stylesheet() . PHP_EOL; ?>
+    </head>
+    <body>
+        <div id="title">Little Horizon Bericht Uploader</div>
+        <div id="navi">
+<?php echo $this->partial('common/navi.phtml'); ?>
+        </div>
+        <form action="" method="post" enctype="application/x-www-form-urlencoded">
+            <div id="upload">
+                <div class="input-label">HTML-Quelltext:</div>
+                <div class="input-element"><textarea name="source" class="text-input"><?php echo ($this->report !== null) ? $this->report : ''; ?></textarea></div>
+                <div class="clear"></div>
+                <div class="input-label">Veröffentlichen:</div>
+                <div class="input-element">
+                    <input type="radio" name="vis" id="vis_priv" value="private" checked="checked"> <label for="vis_priv">Nein</label><br>
+                    <input type="radio" name="vis" id="vis_pub" value="public"> <label for="vis_pub">Ja</label><br>
+                </div>
+                <div class="clear"></div>
+                <div class="input-label">&nbsp;</div>
+                <div class="input-element">
+                    <button type="submit">
+                        Hochladen
+                    </button>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

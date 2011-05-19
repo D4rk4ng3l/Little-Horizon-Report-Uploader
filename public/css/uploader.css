@@ -1,0 +1,173 @@
+body {
+    font-family:"Segoe UI", Verdana, Arial,sans-serif,serif;
+    font-size:12px;
+    padding:10px 0;
+}
+.clear {
+    clear:both;
+}
+a, a:link, a:active, a:visited {
+    color:#5B5B99;
+    text-decoration:none;
+}
+a:hover {
+    color:#B2B2E0;
+    text-decoration:none;
+}
+#title {
+    width:675px;
+    font-size:1.8em;
+    margin-bottom:10px;
+    font-weight:bold;
+}
+#navi {
+    width:175px;
+    margin:0 15px 0 10px;
+    float:left;
+}
+#navi .dijitButton {
+    margin:0;
+}
+#navi .dijitButtonNode {
+    width:163px;
+    height:16px;
+    display:block;
+    margin:0;
+    padding:3px 0;
+    font-size:1.2em;
+}
+#navi .version {
+    width:143px;
+    padding:5px 10px;
+    font-weight:bold;
+    border:1px solid #8686E0
+}
+#navi .separator {
+    width:145px;
+    padding:5px 10px;
+    border-top:1px solid #8686E0;
+    height:10px;
+}
+#report-list {
+    float:left;
+    width:673px;
+    height:400px;
+}
+#report-list .header {
+    width:600px;
+    height:25px;
+}
+#report-list .header > div {
+    float:left;
+    text-align:center;
+}
+#report-list .header .id {
+    height:19px;
+    background:url(bg/header_bg.png) repeat-x;
+    padding-top:6px;
+    width:348px;
+}
+#report-list .header .id:hover {
+    background:url(bg/header_bg_hover.png) repeat-x;
+}
+#report-list .header .visibility {
+    height:19px;
+    background:url(bg/header_bg.png) repeat-x;
+    padding-top:6px;
+    width:99px;
+}
+#report-list .header .visibility:hover {
+    background:url(bg/header_bg_hover.png) repeat-x;
+}
+#report-list .header .compression {
+    height:19px;
+    background:url(bg/header_bg.png) repeat-x;
+    padding-top:6px;
+    width:74px;
+}
+#report-list .header .compression:hover {
+    background:url(bg/header_bg_hover.png) repeat-x;
+}
+#report-list .header .size {
+    height:19px;
+    background:url(bg/header_bg.png) repeat-x;
+    padding-top:6px;
+    width:74px;
+}
+#report-list .header .size:hover {
+    background:url(bg/header_bg_hover.png) repeat-x;
+}
+
+#report-list .entry {
+    border-bottom:1px solid #8686E0;
+    width:600px;
+    height:29px;
+}
+#report-list .entry > div {
+    padding-top:8px;
+    height:17px;
+}
+#report-list .entry .id {
+    width:340px;
+    float:left;
+    padding-left:10px;
+}
+#report-list .entry .visibility {
+    text-align:center;
+    width:100px;
+    float:left;
+}
+#report-list .entry .compression {
+    text-align:center;
+    width:75px;
+    float:left;
+}
+#report-list .entry .size {
+    text-align:center;
+    width:75px;
+    float:left;
+}
+#upload {
+    float:left;
+}
+#upload .text-input {
+    border:1px solid #8686E0;
+}
+#upload textarea {
+    width:500px;
+    height:200px;
+}
+.button100 {
+    background:url(bg/sprites.png) no-repeat top left;
+    background-position: 0 0;
+    display:block;
+    padding:0;
+    border:none;
+    width: 100px;
+    height: 20px;
+} 
+.button100:hover {
+    background-position: 0 -70px;
+} 
+.button150 {
+    background:url(bg/sprites.png) no-repeat top left;
+    background-position: 0 -140px;
+    display:block;
+    padding:0;
+    border:none;
+    width: 150px;
+    height: 20px;
+} 
+.button150:hover {
+    background-position: 0 -210px;
+} 
+.header .separator {
+    background:url(bg/sprites.png) no-repeat top left;
+    background-position: 0 -280px;
+    width: 1px;
+    height: 25px;
+    float:left;
+} 
+#report-list .dojoxGrid {
+    font-size: 1em;
+}

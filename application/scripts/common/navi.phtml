@@ -1,0 +1,22 @@
+            <a class="entry" href="<?php echo $this->url(array(
+                        'controller' => 'report',
+                        'action' => 'index',
+                    ), true); ?>">Übersicht</a>
+            <a class="entry" href="<?php echo $this->url(array(
+                    'controller' => 'report',
+                    'action' => 'upload',
+                ), true); ?>">Hochladen</a>
+            <a class="entry" href="<?php echo $this->url(array(
+                    'controller' => 'report',
+                    'action' => 'statistic',
+                ), true); ?>">Statistik</a>
+            <a class="entry" href="<?php echo $this->url(array(
+                    'controller' => 'contact',
+                    'action' => 'index',
+                ), true); ?>">Kontakt</a>
+            <a class="entry" href="<?php echo $this->url(array(
+                    'controller' => 'download',
+                    'action' => 'index',
+                ), true); ?>">Download</a>
+            <div class="separator"></div>
+            <div class="version">Version <?php echo Uploader_Version::VERSION; ?></div>

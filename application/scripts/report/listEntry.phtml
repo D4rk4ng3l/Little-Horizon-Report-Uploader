@@ -1,0 +1,12 @@
+            <div class="entry">
+                <div class="id"><a href="<?php echo $this->url(array(
+                    'controller' => 'report',
+                    'action' => 'show',
+                    'id' => $this->id,
+                    'vis' => $this->visibility,
+                )); ?>"><?php echo $this->title; ?></a></div>
+                <div class="visibility"><?php echo $this->visibility; ?></div>
+                <div class="compression"><?php echo $this->compression; ?></div>
+                <div class="size"><?php echo $this->formatFilesize($this->size); ?></div>
+                <div class="clear"></div>
+            </div>

@@ -1,0 +1,28 @@
+<?php
+    $theme = 'soria';
+    $this->stylesheet($this->baseUrl() . '/js/dijit/themes/' . $theme . '/' . $theme . '.css');
+$this->stylesheet($this->baseUrl() . '/css/uploader.css');
+    $this->stylesheet($this->baseUrl() . '/css/report.css');
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Bericht ansehen</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <?php echo $this->stylesheet(); ?>
+    </head>
+    <body class="<?php echo $theme;?>">
+        <div id="title">Little Horizon Bericht Uploader</div>
+        <div id="navi">
+<?php echo $this->partial('common/navi.phtml'); ?>
+        </div>
+        <div id="report"><?php echo $this->report; ?></div>
+        <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/dojo/dojo.js" djConfig="parseOnLoad: true"></script>
+        <script type="text/javascript">
+            dojo.require("dijit.form.Button");
+            dojo.require("dijit.form.RadioButton");
+            dojo.require("dijit.form.Textarea");
+        </script>
+    </body>
+</html>
