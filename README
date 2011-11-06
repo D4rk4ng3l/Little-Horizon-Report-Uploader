@@ -1,0 +1,36 @@
+Install
+=======
+
+This documentation has linuy as its target OS.
+
+Installing Phing
+----------------
+
+Install Phing via PEAR
+    $ pear channel-discover pear.phing.info
+    $ pear config-set preferred_state beta
+    $ pear install -a phing/phing
+    $ pear config-set preferred_state stable
+
+
+Create configuration
+--------------------
+
+Add your database configuration to the file config.propeties.
+Run Phing using the following command-line.
+    $ phing apply-config
+    
+Create distribution packages
+----------------------------
+
+If you want to create the distribution packages run the following command on the shell.
+    $ phing build-archs
+    
+Creating tables
+---------------
+
+Import the file db_structure.sql from the install directory.
+
+If you have shell access (e.g. via SSH) you can use the following command.
+    $ mysql -u <MySQL-User> -p<MySQL-Pass> -h <MySQL-Host> <MySQL-Database> < install/db_structure.sql
+
