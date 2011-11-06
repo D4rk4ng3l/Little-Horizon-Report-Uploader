@@ -1,0 +1,66 @@
+.SystemGfxButton, .SystemGfxFormButton
+{
+	border:0; padding:0;
+	font: normal 10px Verdana;
+	color:#A1A4A9;
+	background: url(img/btn_80.gif) top left no-repeat;
+	width:80px; height:19px; overflow:hidden;
+	text-align: center;
+	text-decoration:none;
+	line-height:16px;
+	display:block;
+	margin:0;
+	margin-right:1px;
+	margin-bottom:1px;
+	margin-top:2px;
+}
+
+.SystemGfxFormButton {
+	height:19px;
+	padding-bottom:3px;
+	display:inline;
+}
+
+.SystemGfxButton.Bold, .SystemGfxFormButton.Bold { font-weight:bold; }
+
+.SystemGfxButton.White, .SystemGfxFormButton.White { color:#fff; }
+.SystemGfxButton.Green, .SystemGfxFormButton.Green { color:#BAFF02; }
+.SystemGfxButton.Yellow, .SystemGfxFormButton.Yellow { color:#EFFF08; }
+.SystemGfxButton.Red, .SystemGfxFormButton.Red { color:#BC0000; }
+
+.SystemGfxButton.gw80, .SystemGfxFormButton.gw80 { width:100px; background: url(img/btn_80.gif) top left no-repeat; }
+.SystemGfxButton.gw100, .SystemGfxFormButton.gw100 { width:100px; background: url(img/btn_100.gif) top left no-repeat; }
+.SystemGfxButton.gw120, .SystemGfxFormButton.gw120 { width:120px; background: url(img/btn_120.gif) top left no-repeat; }
+.SystemGfxButton.gw150, .SystemGfxFormButton.gw150 { width:150px; background: url(img/btn_150.gif) top left no-repeat; }
+.SystemGfxButton.gw200, .SystemGfxFormButton.gw200 { width:200px; background: url(img/btn_200.gif) top left no-repeat; }
+
+.SystemGfxButton.light80, .SystemGfxFormButton.light80 { width:80px; background: url(img/btn_80_light.gif) top left no-repeat; }
+.SystemGfxButton.light100, .SystemGfxFormButton.light100 { width:100px; background: url(img/btn_100_light.gif) top left no-repeat; }
+.SystemGfxButton.light120, .SystemGfxFormButton.light120 { width:120px; background: url(img/btn_120_light.gif) top left no-repeat; }
+.SystemGfxButton.light150, .SystemGfxFormButton.light150 { width:150px; background: url(img/btn_150_light.gif) top left no-repeat; }
+.SystemGfxButton.light200, .SystemGfxFormButton.light200 { width:200px; background: url(img/btn_200_light.gif) top left no-repeat; }
+
+.SystemGfxButton.medium80, .SystemGfxFormButton.medium80 { width:80px; background: url(img/btn_80_medium.gif) top left no-repeat; }
+.SystemGfxButton.medium100, .SystemGfxFormButton.medium100 { width:100px; background: url(img/btn_100_medium.gif) top left no-repeat; }
+.SystemGfxButton.medium120, .SystemGfxFormButton.medium120 { width:120px; background: url(img/btn_120_medium.gif) top left no-repeat; }
+.SystemGfxButton.medium150, .SystemGfxFormButton.medium150 { width:150px; background: url(img/btn_150_medium.gif) top left no-repeat; }
+.SystemGfxButton.medium200, .SystemGfxFormButton.medium200 { width:200px; background: url(img/btn_200_medium.gif) top left no-repeat; }
+
+.SystemGfxButton:hover, .SystemGfxFormButton:hover {
+	text-decoration:none;
+	background-position:0 -19px;
+}
+.SystemGfxButton:active, .SystemGfxFormButton:active {
+	margin:0;
+	padding:-3px;
+	margin-left:1px;
+	margin-top:3px;
+}
+
+.xdebug-error { color:#000; font-size:14px; }
+.xdebug-var-dump, .ErrorBox { color: #000; background-color: #FFF; border: 1px dashed #F00; border-radius: 5px; padding: 10px; margin: 5px; }
+h1, h2, h3, h4, h5, h6 {margin: 5px 0;}
+.MessageContainer.Error .MessageContainerHead {color: #BC0000;}
+.MessageContainer.Error .MessageTableCellLeft {padding: 6px;}
+.MessageContainerBodyBox .MessageContainer {margin: 0;border: 0}
+.statsBar {height:10px; background-color: #B6BBC1;}

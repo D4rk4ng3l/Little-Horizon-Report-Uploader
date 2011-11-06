@@ -1,101 +1,181 @@
 <?php
-class Uploader_Config implements Iterator, Countable
+/**
+ * Class to manage configuration.
+ *
+ * @throws Uploader_Config_Exception
+  */
+class Uploader_Config
 {
-    private $_data = array();
-    
-    private $_allowModify = false;
-    
-    private $_index = 0;
-    
-    function __construct(array $data, $allowModify = false)
+    /**
+     * The configuration itself.
+     *
+     * @var array
+     */
+    private $_config = null;
+
+    /**
+     * Instance of the IO-Handler.
+     *
+     * @var Uploader_Config_IoHandler_Interface
+     */
+    private $_ioHandler = null;
+
+    /**
+     * Status for the automatic configuration saving on class destruction.
+     * It's disabled by default.
+     *
+     * @var bool
+     */
+    private $_autosave = false;
+
+    /**
+     * Class constructor
+     *
+     * @param Uploader_Config_IoHandler_Interface|string $ioHandler      Instance or name of the IO-Handler.
+     * @param array                                      $handlerOptions Options for the IO-Handler.
+     *
+     * @throws Uploader_Config_Exception
+     */
+    public function __construct($ioHandler, $handlerOptions = array())
     {
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $this->_data[$key] = new self($value, $allowModify);
-            } else {
-                $this->_data[$key] = $value;
-            }
+        if (is_string($ioHandler)) {
+            $pluginLoader = new Zend_Loader_PluginLoader(
+                array(
+                    'Uploader_Config_IoHandler_' => APPLICATION_PATH . '/../library/Uploader/Config/IoHandler/',
+                )
+            );
+
+            $className = $pluginLoader->load($ioHandler);
+            $ioHandler = new $className($handlerOptions);
         }
-        $this->_allowModify = $allowModify;
-    }
-    
-    public function __get($key)
-    {
-        if (isset($this->_data[$key])) {
-            return $this->_data[$key];
-        }
-        
-        return false;
-    }
-    
-    public function __set($key, $value)
-    {
-        if (!$this->_allowModify) {
-            require_once 'Uploader/Config/Exception.php';
+        if (!$ioHandler instanceof Uploader_Config_IoHandler_Interface) {
             throw new Uploader_Config_Exception(
-                'Modifications are not allowed'
+                "Invalid IO-Handler specified; The IO-Handler must implement Uploader_Config_IoHandler_Interface"
             );
         }
-        
-        if (is_array($value)) {
-            $this->_data[$key] = new self($value, $this->_allowModify);
-        } else {
-            $this->_data[$key] = $value;
+        $this->_ioHandler = $ioHandler;
+    }
+
+    /**
+     * Loads the configuration from the IO-Handler.
+     * The filename is used for static storage.
+     *
+     * @param string $configFilename Name of file on the static storage.
+     *
+     * @return void
+     */
+    public function load($configFilename)
+    {
+        $this->_config = $this->_ioHandler->load($configFilename);
+    }
+
+    /**
+     * Saves the configuration for the next request.
+     * The filename is used for static storage.
+     *
+     * @return void
+     */
+    public function save()
+    {
+        $this->_ioHandler->save($this->_config);
+    }
+
+    /**
+     * Retrieves the value of a configuration parameter.
+     *
+     * @param string $paramName    Name of the configuration parameter.
+     * @param mixed  $defaultValue Default value to return, if param isn't set.
+     *
+     * @return mixed
+     */
+    public function getParam($paramName, $defaultValue = null)
+    {
+        if (isset($this->_config[$paramName])) {
+            return $this->_config[$paramName];
+        }
+
+        return $defaultValue;
+    }
+
+    /**
+     * Sets a configuration parameter.
+     * If auto-save is enabled the configuration is also saved.
+     *
+     * @param $paramName
+     * @param $paramValue
+     *
+     * @return void
+     */
+    public function setParam($paramName, $paramValue)
+    {
+        $this->_config[$paramName] = $paramValue;
+        if ($this->_autosave) {
+            $this->save();
         }
     }
-    
-    public function __isset($key)
+
+    /**
+     * Class destructor.
+     * If auto-save is enabled the configuration will be saved.
+     */
+    public function __destruct()
     {
-        return isset($this->_data[$key]);
-    }
-    
-    public function __unset($key)
-    {
-        unset($this->_data[$key]);
-    }
-    
-    public function toArray()
-    {
-        $array = array();
-        foreach ($this->_data as $key => $value) {
-            if ($value instanceof Uploader_Config) {
-                $array[$key] = $value->toArray();
-            } else {
-                $array[$key] = $value;
-            }
+        if ($this->_autosave) {
+            $this->save();
         }
-        return $array;
     }
-    
-    public function count()
+
+    /**
+     * Sets the whole configuration.
+     * If auto-save is enabled the configuration is also saved.
+     *
+     * @param array $config New configuration.
+     */
+    public function setConfig($config)
     {
-        return count($this->_data);
+        $this->_config = (array) $config;
+        if ($this->_autosave) {
+            $this->save();
+        }
     }
-    
-    public function current()
+
+    /**
+     * Returns the whole configuration.
+     *
+     * @return array
+     */
+    public function getConfig()
     {
-        return current($this->_data);
+        return $this->_config;
     }
-    
-    public function next()
+
+    /**
+     * Enables automatic configuration saving.
+     *
+     * @return void
+     */
+    public function enableAutosave()
     {
-        $this->_index++;
-        return next($this->_data);
+        $this->_autosave = true;
     }
-    
-    public function key()
+
+    /**
+     * Disables automatic configuration saving.
+     *
+     * @return void
+     */
+    public function disableAutosave()
     {
-        return key($this->_data);
+        $this->_autosave = false;
     }
-    
-    public function rewind()
+
+    /**
+     * Returns the autosave status.
+     *
+     * @return bool
+     */
+    public function isAutosaveActive()
     {
-        $this->_index = 0;
-        return reset($this->_data);
-    }
-    
-    public function valid()
-    {
-        return $this->_index < count($this->_data);
+        return $this->_autosave;
     }
 }

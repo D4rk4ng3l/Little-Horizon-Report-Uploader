@@ -1,0 +1,30 @@
+<div class="MessageContainer">
+    <div class="MessageContainerHeadBox">
+        <div class="MessageContainerHead">Öffentlichte Berichte</div>
+    </div>
+    <div class="MessageContainerBodyBox">
+        <table class="MessageTable" width="608" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="MessageTableHeadCellLeft">Datum</td>
+                <td class="MessageTableHeadCell">Betreff</td>
+            </tr>
+<?php
+if (!is_array($this->reports) || count($this->reports) == 0) {
+?>
+            <tr>
+                <td class="MessageTableCellLeft" colspan="2" style="padding: 6px;">Es sind keine öffentlichen Berichte vorhanden.</td>
+            </tr>
+<?php
+} else {
+    foreach ($this->reports as $report) { ?>
+            <tr>
+                <td class="MessageTableCellLeft" style="width:80px;padding: 0 6px;"><?php echo date('d.m.Y', $report['creation']); ?></td>
+                <td class="MessageTableCellLeft"><a href="<?php echo $this->baseUrl(); ?>/reports/show/id/<?php echo $report['id']; ?>/"><?php echo $report['subject']; ?></a></td>
+            </tr>
+<?php
+    }
+}
+?>
+        </table>
+    </div>
+</div>

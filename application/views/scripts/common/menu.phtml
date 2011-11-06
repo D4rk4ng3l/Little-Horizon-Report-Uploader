@@ -1,0 +1,27 @@
+<div class="NavContainer">
+    <?php
+    foreach ($this->menuEntries as $menuEntry) {
+        if ($menuEntry['type'] == 'BREAK') {
+    ?>
+    <div class="NavFirst">
+        <div class="NavFirstText"><?php echo $menuEntry['title']; ?></div>
+    </div>
+    <?php
+        } else {
+            if ($menuEntry['type'] == 'INTERNAL') {
+                $url = $this->baseUrl() . '/' . $menuEntry['href'];
+            } else if ($menuEntry['type'] == 'EXTERNAL') {
+                $url = $menuEntry['href'];
+                $target = ' target="_blank"';
+            }
+            ?>
+            <div class="NavSecond">
+                <div class="NavSecondText">
+                    <a href="<?php echo $url; ?>" class="navLink"<?php echo $target; ?>><?php echo $menuEntry['title']; ?></a>
+                </div>
+            </div>
+    <?php
+        }
+    }
+    ?>
+</div>

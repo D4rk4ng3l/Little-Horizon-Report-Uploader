@@ -1,0 +1,657 @@
+/* Cascading Style Sheet (CSS 2)-Definitionen f�r Content-Frame des MMOG Horizon */
+
+/****************************************/
+/*										*/
+/* Stand:		M�rz 2004				*/
+/* Version:		1.0						*/
+/* Copyright:	Steffen "Dhyani" Marx	*/
+/*				Lissy "Princess" M�dl	*/
+/*										*/
+/****************************************/
+
+/* Getestet:										*/
+
+/* Bekannte Bugs:									*/
+
+/* Unbekannte Bugs:									*/
+
+/* Bei Nutzung von Inhalten dieser Datei (vollstaendig oder in Teilen) sind			*/
+/* folgende Zeilen UNBEDINGT mit anzugeben:											*/
+
+/* (c) 2004 by Steffen "Dhyani" Marx   dhyan@building-better-worlds.org for			*/
+/* "Horizon"  (http://horizon.building-better-worlds.org/), the ultimate MMOG		*/
+/* in the Web!  Visit now & enjoy! :o)												*/
+
+/* Defaultdefinitionen fuer den BODY */
+BODY
+{
+/*	background-image: url(img/background.jpg);
+	background-repeat: no-repeat;
+	background-color: #000000;*/
+	background-image:url(img/horizon_bg.jpg);
+	background-repeat: repeat-x;
+	background-color: #4B5465;
+	background-position: 0px 168px;
+	color: #FFFFFF;
+
+	margin: 0px;
+	padding: 0px;
+    font-family: Verdana, Arial, sans-serif, serif;
+}
+
+/* Haupt-Container */
+.MainContainer
+{
+	/*border-right: solid #9B9C9C 2px;*/
+	margin: 0px;
+	padding: 0px;
+	width: 652px;
+	height: 100%;
+	float: left;
+}
+
+
+/* Formatierungen Nachrichtensystem */
+.MessageContainer
+{
+	border-left: solid #A4C8E5 1px;
+	border-right: solid #A0C4E7 1px;
+	border-top: solid #B3C0C6 1px;
+	border-bottom: solid #6F89A6 1px;
+	margin: 0px;
+	padding: 0px;
+	margin-left: 30px;
+	margin-bottom: 7px;
+	width: 610px;
+}
+
+/* Box, die die �berschrift aufnimmt */
+.MessageContainerReiter
+{
+	margin-left: 30px;
+	margin-bottom: 0px;
+	width: 610px;
+	height: 22px;
+}
+
+.MessageContainerReiterFont
+{
+	color: #000000;
+}
+
+
+/* Box, die die �berschrift aufnimmt */
+.MessageContainerHeadBox
+{
+	background-color: #A1ADBA;
+	border-left: solid #4D5E72 2px;
+	border-right: solid #67798D 2px;
+	border-top: solid #445368 2px;
+	border-bottom: solid #617084 2px;
+	width: 608px;
+	height: 22px;
+}
+
+/* �berschrift himself */
+.MessageContainerHead
+{
+	font: bold 14px Verdana;
+	background-image: url(img/messages_arrow.gif);
+	background-repeat: no-repeat;
+	background-color: #EAEDEF;
+	padding-top: 1px;
+	padding-left: 24px;
+	margin: 1px;
+	color: #000000;
+	height: 19px;
+}
+
+/* Selectbox in der �berschrift */
+.MessageContainerHeadSelectBox
+{
+	border: solid #919DB8 1px;
+	font: bold 11px Verdana;
+	background-color: #2A3846;
+	color: #FFFFFF;
+	width: 100px;
+}
+
+/* Container f�r die Navigationsleiste */
+.MessageContainerNaviBox
+{
+	border-top: solid #919DB8 1px;
+	background-color: #EAEDEF;
+	margin: 0px;
+	padding: 0px;	
+	border: solid 0px;
+	align: center;
+
+}
+
+/* Container f�r den Body */
+.MessageContainerBodyBox
+{
+	border-top: solid #919DB8 1px;
+	background-color: #343F4F;
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Nachrichtentabelle */
+.MessageTable
+{
+	margin-top: 1px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+/* Unterer Teil der Nachrichtentabelle */
+.MessageTableBottom
+{
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+/* linke Tabellenkopfzelle */
+.MessageTableHeadCellLeft
+{
+	font: bold 12px Verdana;
+	background-color: #6B727E;
+	border-left: solid #7D8691 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	color: #FFFFFF;
+	height: 15px;
+	line-height: 21px;
+}
+
+/* die Zellen der Navigationstabelle */
+.MessageTableNavCell
+{
+	font: bold 12px Verdana;
+	background-color: #EAEDEF; old:#6B727E;
+	border-left: solid #37404D 0px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 4px;
+	padding-right: 4px;
+	color: #000000; 
+	height: 15px;
+	line-height: 21px;
+}
+
+/* alle anderen Tabellenkopfzellen */
+.MessageTableHeadCell
+{
+	font: bold 12px Verdana;
+	background-color: #6B727E;
+	border-left: solid #37404D 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	color: #FFFFFF;
+	height: 15px;
+	line-height: 21px;
+}
+
+/* linke Tabellenzelle */
+.MessageTableCellLeft
+{
+	font: bold 11px Verdana;
+	background-color: #545C6A;
+	border-left: solid #7D8691 1px;
+	border-top: solid #6E7780 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	height: 15px;
+	line-height: 18px;
+}
+
+/* alle anderen Tabellenzellen */
+.MessageTableCell
+{
+	font: bold 11px Verdana;
+	background-color: #545C6A;
+	border-left: solid #37404D 1px;
+	border-top: solid #6E7780 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	padding-right: 6px;
+	height: 15px;
+	line-height: 18px;
+}
+/* linke Tabellenzelle */
+.MessageTableCellLeftHIGH
+{
+	font: bold 11px Verdana;
+	background-color: #644C5A;
+	border-left: solid #7D8691 1px;
+	border-top: solid #6E7780 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	height: 15px;
+	line-height: 18px;
+}
+
+/* alle anderen Tabellenzellen */
+.MessageTableCellHIGH
+{
+	font: bold 11px Verdana;
+	background-color: #644C5A;
+	border-left: solid #37404D 1px;
+	border-top: solid #6E7780 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	height: 15px;
+	line-height: 18px;
+}
+
+/* linke Tabellenzelle */
+.MessageTableCellLeftRead
+{
+	font: bold 11px Verdana;
+	background-color: #545C6A;
+	border-left: solid #7D8691 1px;
+	border-top: solid #6E7780 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	height: 15px;
+	line-height: 18px;
+	color: #cccccc;
+}
+
+/* alle anderen Tabellenzellen */
+.MessageTableCellRead
+{
+	font: bold 11px Verdana;
+	background-color: #545C6A;
+	border-left: solid #37404D 1px;
+	border-top: solid #6E7780 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	height: 15px;
+	line-height: 18px;
+	color: #cccccc;
+}
+/* linke Tabellenzelle */
+.MessageTableCellLeftReadHIGH
+{
+	font: bold 11px Verdana;
+	background-color: #746C7A;
+	border-left: solid #7D8691 1px;
+	border-top: solid #6E7780 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	height: 15px;
+	line-height: 18px;
+	color: #cccccc;
+}
+
+/* alle anderen Tabellenzellen */
+.MessageTableCellReadHIGH
+{
+	font: bold 11px Verdana;
+	background-color: #746C7A;
+	border-left: solid #37404D 1px;
+	border-top: solid #6E7780 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	height: 15px;
+	line-height: 18px;
+	color: #cccccc;
+}
+
+/* Tabellenfussformatierung */
+.MessageTableBottomCellLeft
+{
+	font: bold 12px Verdana;
+	background-color: #6B727E;
+	border-left: solid #7D8691 1px;
+	border-top: solid #7E8792 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	color: #FFFFFF;
+	height: 15px;
+	line-height: 21px;
+}
+
+/* Tabellenfussformatierung */
+.MessageTableBottomCell
+{
+	font: bold 12px Verdana;
+	background-color: #6B727E;
+	border-left: solid #7D8691 0px;
+	border-top: solid #7E8792 1px;
+	border-bottom: solid #37404D 1px;
+	padding-left: 6px;
+	color: #FFFFFF;
+	height: 15px;
+	line-height: 21px;
+}
+
+/* die Inaktiven Buttons im Reiter der Nachrichtenauswahl */
+.MessageReiter
+{
+	font: bold 12px Verdana;
+	/*background-color: #545C6A;*/
+	border: solid #FFFFFF 0px;
+	height: 18px;
+	color: #000000; 
+	/*cursor: hand;
+	cursor: pointer;*/
+}
+
+/* alle anderen Tabellenzellen */
+.MessageBodyText
+{
+	font: bold 11px Verdana;
+	background-color: #545C6A;
+	height: 15px;
+	line-height: 18px;
+}
+
+.MessageBodyTextWarn
+{
+	font: bold 11px Verdana;
+	background-color: #545C6A;
+	height: 15px;
+	line-height: 18px;
+	color: #ffff00;
+}
+
+.MessageBodyTextDead
+{
+	font: bold 11px Verdana;
+	background-color: #545C6A;
+	height: 15px;
+	line-height: 18px;
+	color: #ff0000;
+}
+
+/* alle anderen Tabellenzellen */
+.MessageBodyCellText
+{
+	font: bold 11px Verdana;
+	background-color: #545C6A;
+	height: 15px;
+	line-height: 16px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+}
+
+/* alle anderen Tabellenzellen */
+.MessageBodyCellHead
+{
+	font: bold 11px Verdana;
+	background-color: #545C6A;
+	border-bottom: solid #FFFFFF 1px;
+	height: 15px;
+	line-height: 16px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-bottom: 4px;
+}
+
+/* alle anderen Tabellenzellen */
+.MessageBodyCellTextSmall
+{
+	font: 10px Verdana;
+	background-color: #545C6A;
+	height: 14px;
+	line-height: 15px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+
+/* alle anderen Tabellenzellen */
+.MessageBodyCellHeadSmall
+{
+	font: 10px Verdana;
+	background-color: #545C6A;
+	border-bottom: solid #FFFFFF 1px;
+	height: 14px;
+	line-height: 15px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+}
+
+/* Formatierungen fuer die Buttons */
+.MessageButtons
+{
+	margin-left: 3px;
+	margin-right: 2px;
+}
+
+/* Formularformatierung fuer Nachrichtenschreiben */
+.MessageWriteForm
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+/* Textarea fuer Nachrichtenschreiben */
+.MessageTextarea
+{
+	font: bold 11px Verdana;
+	color: #E9E8E4;
+	border: 1px solid #ADB1B9;
+	background-color: #242E37;
+	width: 450px;
+}
+
+/* Inputfeld fuer Nachrichtenschreiben */
+.MessageInputfield
+{
+	font: bold 11px Verdana;
+	color: #E9E8E4;
+	border: 1px solid #ADB1B9;
+	background-color: #242E37;
+	height: 18px;
+	width: 450px;
+}
+
+.MessageButton
+{
+	font: bold 11px Verdana;
+	color: #000000;
+	border: 1px solid #E5E2DB;
+	background-color: #E9E8E4;
+	height: 18px;
+	width: 450px;
+}
+
+.MessageReportDefault
+{
+	color: #ffffff;
+}
+
+.MessageReportFleetArrive
+{
+	color: #ffffff;
+}
+
+.MessageReportExplore
+{
+	color: #00FF00;
+}
+
+.MessageReportResearch
+{
+	color: #ccccff;
+}
+
+.MessageReportColonize
+{
+	color: #00ffff;
+}
+
+.MessageReportSpy
+{
+	color: #ffff00;
+}
+
+.MessageReportBattle
+{
+	color: #ff0000;
+}
+
+.MessageReportAlliance
+{
+	color: #88ffff;
+}
+
+.MessageReportBuddy
+{
+	color: #88ff88;
+}
+
+.MessageReportTrade
+{
+	color: #22ff66;
+}
+
+
+.MessageReportEvent
+{
+	color: #ff77ff;
+}
+
+.MessageReportResponse
+{
+	color: #FFFF00;
+}
+
+.MessageReportLink
+{
+	color: #AAAAFF;
+}
+
+.MessageReportDefaultRead
+{
+	color: #cccccc;
+}
+
+.MessageReportFleetArriveRead
+{
+	color: #cccccc;
+}
+
+.MessageReportExploreRead
+{
+	color: #11cc11;
+}
+
+.MessageReportColonizeRead
+{
+	color: #11cccc;
+}
+
+.MessageReportSpyRead
+{
+	color: #cccc11;
+}
+
+.MessageReportResearchRead
+{
+	color: #7777cc;
+}
+
+.MessageReportBattleRead
+{
+	color: #cc1111;
+}
+
+.MessageReportAllianceRead
+{
+	color: #77cccc;
+}
+
+.MessageReportBuddyRead
+{
+	color: #77cc77;
+}
+
+.MessageReportTradeRead
+{
+	color: #09cc44;
+}
+
+
+.MessageReportEventRead
+{
+	color: #cc77cc;
+}
+
+.MessageReportLink
+{
+	color: #AAAAFF;
+}
+.MessageBuddyFriend
+{
+	color: #00FF00;
+}
+.MessageBuddyFriend_Wait
+{
+	color: #FFFF80;
+}
+.MessageBuddyEnemy
+{
+	color: #FB0505;
+}
+
+/* Hyperlinks */
+a
+{
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+/* Formatierungen Accountverwaltung */
+.AccountContainer
+{
+	border-left: solid #A4C8E5 1px;
+	border-right: solid #A0C4E7 1px;
+	border-top: solid #B3C0C6 1px;
+	border-bottom: solid #6F89A6 1px;
+	margin-left: 30px;
+	margin-top: 8px;
+	width: 612px;
+}
+
+/* Selectbox f�r Accountverwaltung */
+.AccountSelectBox
+{
+	font: bold 11px Verdana;
+	background-color: #242E37;
+	color: #E9E8E4;
+	width: 450px;
+}
+
+/* Checkbox f�r Accountverwaltung */
+.AccountCheckBox
+{
+	margin-left: 0px;
+	padding-left: 0px;
+	color: #E9E8E4;
+}
+.AccInputfield_long
+{
+	font: bold 11px Verdana;
+	color: #E9E8E4;
+	border-top: 1px solid #000000;
+	border-left: 1px solid #000000;
+	border-bottom: 1px solid #707682;
+	border-right: 1px solid #707682;
+	background-color: #2B3441;
+	height: 18px;
+	width: 200px;
+	padding-left: 2px;
+}
+

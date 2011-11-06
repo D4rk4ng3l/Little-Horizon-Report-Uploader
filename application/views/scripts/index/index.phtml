@@ -1,0 +1,53 @@
+<?php if ($this->erroneousReport) { ?>
+    <div class="MessageContainer Error">
+        <div class="MessageContainerHeadBox">
+            <div class="MessageContainerHead">Fehlerhafte eingabe</div>
+        </div>
+        <div class="MessageContainerBodyBox">
+            <div class="MessageTableCellLeft">Der eingegebene Quelltext ist kein gültiger Horizon Bericht.</div>
+        </div>
+    </div>
+    <br/>
+<?php } ?>
+    <div class="MessageContainer">
+        <div class="MessageContainerHeadBox">
+            <div class="MessageContainerHead">Uploader</div>
+        </div>
+        <div class="MessageContainerBodyBox">
+            <form action="<?php echo $this->baseUrl(); ?>/reports/upload" method="post" class="MessageWriteForm" onsubmit="return (document.getElementById('report').value.length > 0);">
+                <table cellspacing="0" cellpadding="0" border="0" width="608" class="MessageTable">
+                    <tr>
+                        <td class="MessageTableCellLeft" width="150" valign="top">
+                            Sichbarkeit:
+                        </td>
+                        <td class="MessageTableCell" width="458">
+                            <input type="radio" id="visibility_private" name="visibility" value="private"<?php if (!isset($this->visibility) || $this->visibility == 'private') { ?> checked="checked"<?php } ?> /> <label for="visibility_private">Privat</label><br/>
+                            <input type="radio" id="visibility_public" name="visibility" value="public"<?php if (isset($this->visibility) && $this->visibility == 'public') { ?> checked="checked"<?php } ?> /> <label for="visibility_public">Öffentlich</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="MessageTableCellLeft" width="150" valign="top">
+                            <label for="report">Kopiere den HTML-Quelltext des Berichtes und füge ihn in das Eingabefeld ein.</label>
+                        </td>
+                        <td class="MessageTableCell" width="458">
+                            <textarea rows="10" id="report" name="report" cols="50" class="MessageTextarea"><?php echo $this->escape($this->report); ?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="MessageTableCellLeft" width="150" valign="top">
+                            <label for="comment">Kommentar:</label>
+                        </td>
+                        <td class="MessageTableCell" width="458">
+                            <textarea rows="10" id="comment" name="comment" cols="50" class="MessageTextarea"><?php echo $this->escape($this->comment); ?></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="MessageTableCellLeft"></td>
+                        <td class="MessageTableCell" align="center">
+                            <input type="submit" class="SystemGfxFormButton Green Bold light120" value="Bericht hochladen"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>

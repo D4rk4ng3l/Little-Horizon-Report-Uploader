@@ -1,0 +1,74 @@
+<?php
+$months = array("1" => "Januar", "Februar", "M&auml;rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember");
+?>
+<div class="MessageContainer">
+    <div class="MessageContainerHeadBox">
+        <div class="MessageContainerHead">Zusammenfassung</div>
+    </div>
+    <div class="MessageContainerBodyBox">
+        <table border="0" cellpadding="0" cellspacing="0" width="608" class="MessageTable">
+            <tr>
+                <td class="MessageTableCellLeft" style="width:270px;">Hochgeladene Berichte:</td>
+                <td class="MessageTableCell" style="padding-left: 15px;"><?php echo $this->summary['sumCount']; ?></td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft">Durchschn. hochgeladene Ber. pro Tag:</td>
+                <td class="MessageTableCell" style="padding-left: 15px;"><?php echo number_format($this->summary['avgCount'], 2, ',', "'"); ?></td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft">Gesamtgröße aller Berichte: </td>
+                <td class="MessageTableCell" style="padding-left: 15px;"><?php echo $this->formatBytes($this->summary['sumSize'], 'long', 2, ',', "'"); ?></td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft">Durchschnittsgröße je Ber.:</td>
+                <td class="MessageTableCell" style="padding-left: 15px;"><?php echo $this->formatBytes($this->summary['avgSize'], 'long', 2, ',', "'"); ?></td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft">Peak-Wert:</td>
+                <td class="MessageTableCell" style="padding-left: 15px"><?php echo $this->summary['peakCount']; ?></td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft">Peak-Wert war am:</td>
+                <td class="MessageTableCell" style="padding-left: 15px"><?php echo date("d.m.Y", $this->summary['peakDate']); ?></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br/>
+<div class="MessageContainer">
+    <div class="MessageContainerHeadBox">
+        <div class="MessageContainerHead">Tagesstatistiken</div>
+    </div>
+    <div class="MessageContainerBodyBox">
+        <table cellpadding="0" cellspacing="0" border="0" class="MessageTable" width="608">
+            <tr>
+                <td style="padding-left: 10px;" class="MessageTableCellLeft">Datum</td>
+                <td style="padding-left: 20px;" class="MessageTableCell" colspan="2">Hochgeladene Berichte </td>
+            </tr>
+<?php
+$lastMonth = "";
+foreach ($this->dayStats as $dayStat) {
+    $month = date("m", $dayStat['creation']);
+    $year = date("Y", $dayStat['creation']);
+    $currentMonth = $month . $year;
+    $barWidth = round(445 * $dayStat['count'] / $this->summary['peakCount'], 0);
+    if ($currentMonth != $lastMonth) {
+?>
+            <tr>
+                <td class="MessageTableCellLeft" align="center" colspan="3"><?php echo $months[(int) $month]; ?> <?php echo $year; ?></td>
+            </tr>
+<?php
+    }
+?>
+            <tr>
+                <td class="MessageTableCellLeft" style="width:100px;"><?php echo date("d.m.Y", $dayStat['creation']); ?></td>
+                <td class="MessageTableCell" style="width:30px; text-align: right;"><?php echo $dayStat['count']; ?></td>
+                <td class="MessageTableCell"><div class="statsBar" style="width:<?php echo $barWidth; ?>px"></div></td>
+            </tr>
+<?php
+    $lastMonth = $currentMonth;
+}
+?>
+        </table>
+    </div>
+</div>

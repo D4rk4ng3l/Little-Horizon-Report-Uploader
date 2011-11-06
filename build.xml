@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="uploader" default="build-all">
+
+    <property name="build.archives.targz" value="true"/>
+    <property name="build.archives.tarbz2" value="true"/>
+    <property name="build.archives.zip" value="true"/>
+
+    <property name="target.uploader.ini" value="application/configs/uploader.ini"/>
+    <property name="target.db-structure.sql" value="install/db-structure.sql"/>
+
+    <property file="config.properties"/>
+
+    <fileset dir="${project.basedir}" id="distFiles">
+        <include name="application/"/>
+        <include name="library/"/>
+        <include name="dist/"/>
+        <include name="install/"/>
+        <include name="public/"/>
+        <include name="build.xml"/>
+    </fileset>
+
+    <target name="prepare">
+        <echo message="Preparing directories"/>
+        <delete dir="${project.basedir}/dist"/>
+        <delete dir="${project.basedir}/build" />
+        <mkdir dir="${project.basedir}/build" />
+        <mkdir dir="${project.basedir}/dist" />
+    </target>
+
+    <target name="apply-config">
+        <copy file="${project.basedir}/templates/uploader.ini.tpl" tofile="${target.uploader.ini}" overwrite="true">
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+        <copy file="${project.basedir}/templates/db-structure.sql.tpl" tofile="${target.db-structure.sql}" overwrite="true">
+            <filterchain>
+                <expandproperties/>
+            </filterchain>
+        </copy>
+    </target>
+
+    <target name="build-archs" depends="prepare">
+        <if>
+            <istrue value="${build.archives.targz}"/>
+            <then>
+                <tar destFile="${project.basedir}/build/${phing.project.name}.tar.gz" compression="gzip">
+                    <fileset refid="distFiles"/>
+                </tar>
+            </then>
+        </if>
+
+        <if>
+            <istrue value="${build.archives.tarbz2}"/>
+            <then>
+                <tar destFile="${project.basedir}/build/${phing.project.name}.tar.bz2" compression="bzip2">
+                    <fileset refid="distFiles"/>
+                </tar>
+            </then>
+        </if>
+
+        <if>
+            <istrue value="${build.archives.zip}"/>
+            <then>
+                <zip destfile="${project.basedir}/build/${phing.project.name}.zip" includeemptydirs="true">
+                    <fileset refid="distFiles"/>
+                </zip>
+            </then>
+        </if>
+
+        <if>
+            <istrue value="${build.archives.targz}"/>
+            <then>
+                <copy file="${project.basedir}/build/${phing.project.name}.tar.gz" todir="${project.basedir}/dist"/>
+            </then>
+        </if>
+
+        <if>
+            <istrue value="${build.archives.tarbz2}"/>
+            <then>
+                <copy file="${project.basedir}/build/${phing.project.name}.tar.bz2" todir="${project.basedir}/dist/"/>
+            </then>
+        </if>
+
+        <if>
+            <istrue value="${build.archives.zip}"/>
+            <then>
+                <copy file="${project.basedir}/build/${phing.project.name}.zip" todir="${project.basedir}/dist/"/>
+            </then>
+        </if>
+    </target>
+
+    <target name="build-all" depends="prepare, apply-config, build-archs"/>
+
+</project>

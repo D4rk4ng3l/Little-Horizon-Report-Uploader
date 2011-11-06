@@ -1,0 +1,24 @@
+<?php
+echo $this->doctype() ."\n";
+$this->headCss('css/message.css');
+$this->headCss('css/main.css');
+$this->headCss('css/horizon.css');
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?php echo $this->headCss(); ?>
+
+<title>Horizon Bericht Uploader</title>
+</head>
+
+<body>
+<div style="position:absolute; width:60px; height:60px; z-index:1; top: 42px; left:270px;"><img src="<?php echo $this->baseUrl(); ?>/css/img/horizon_drude.gif" alt="" width="60" height="60"  /></div>
+<div style="padding: 0px; margin:0px; background-image:url(<?php echo $this->baseUrl(); ?>/css/img/horizon_ornament.jpg); height: 168px; widows:100%; background-repeat:no-repeat; background-color:#000000;"></div>
+<table cellpadding="0" cellspacing="0" border="0" width="800">
+    <tr>
+        <td style="vertical-align:top;"><?php echo $this->menu(); ?></td>
+        <td style="vertical-align:top;"><?php echo $this->layout()->content; ?></td>
+    </tr>
+</table>
+

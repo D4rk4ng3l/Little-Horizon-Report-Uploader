@@ -1,224 +1,220 @@
 <?php
+/**
+ * Created by JetBrains PhpStorm.
+ * User: Darky
+ * Date: 17.09.11
+ * Time: 16:33
+ * To change this template use File | Settings | File Templates.
+ */
+ 
 class Uploader_Report
 {
-    const COMPRESS_BZIP2 = 'compress.bzip2';
-    const COMPRESS_NONE = 'file';
-    const COMPRESS_GZIP = 'compress.zlib';
-    const COMPRESS_ZIP = 'zip';
+    const VISIBILITY_PUBLIC = 'public';
+
+    const VISIBILITY_PRIVATE = 'private';
+
+    /**
+     * @var string
+     */
+    private $_extracted;
+
+    /**
+     * @var int
+     */
+    private $_creationTime;
+
+    /**
+     * @var string
+     */
+    private $_visibility = self::VISIBILITY_PUBLIC;
+
+    /**
+     * @var string
+     */
+    private $_id;
+
+    /**
+     * @var string
+     */
+    private $_comment;
+
+    /**
+     * @var string
+     */
+    private $_subject;
     
-    const VISIBILITY_PRIVATE = 0;
-    const VISIBILITY_PUBLIC = 1;
-    
-    public static $visibilityMap = array(
-        'private' => self::VISIBILITY_PRIVATE,
-        'public' => self::VISIBILITY_PUBLIC,
-    );
-    
-    private $_storePath = '';
-    
-    private $_compressionMap = array(
-        'compress.bzip2' => '.report.bz2',
-        'compress.zlib' => '.report.gz',
-        'zip' => '.report.zip',
-        'file' => '.report.none',
-    );
-    
-    private $_compressionMethod = self::COMPRESS_BZIP2;
-    
-    private $_report = null;
-    
-    private $_reportId = null;
-    
-    private $_meta = '';
-    
-    private $_visibility = self::VISIBILITY_PRIVATE;
-    
-    public function __construct($storePath, $compression = self::COMPRESS_BZIP2)
+    public function __construct($reportData)
     {
-        $storePath = realpath($storePath);
-        if ($storePath == '') {
-            require_once 'Uploader/Exception.php';
-            throw new Uploader_Exception('The given path doesn\'t exist.');
+        $this->_creationTime = mktime(0, 0, 0);
+        if (isset($reportData['creationTime'])) {
+            $this->_creationTime = (int) $reportData['creationTime'] - ($reportData['creationTime'] % 86400);
         }
-        $this->_storePath = $storePath;
-        $this->_compressionMethod = $compression;
+
+        if (isset($reportData['visibility'])) {
+            $reflection = new ReflectionClass($this);
+            if (!in_array($reportData['visibility'], $reflection->getConstants())) {
+                throw new Uploader_Report_Exception(
+                    'Unknown visibility specified. Please use Uploader_Report::VISIBILITY_* class constants.'
+                );
+            }
+            $this->_visibility = (string) $reportData['visibility'];
+        }
+
+        if (isset($reportData['report'])) {
+            $this->_extracted = (string) $reportData['report'];
+        }
+
+        if (isset($reportData['id'])) {
+            $this->_id = (string) $reportData['id'];
+        }
+
+        if (isset($reportData['comment'])) {
+            $this->_comment = (string) $reportData['comment'];
+        }
+
+        if (isset($reportData['subject'])) {
+            $this->_subject = (string) $reportData['subject'];
+        }
     }
-    
-    public function load($reportId, $visibility)
+
+    public function extract($htmlReport)
     {
-        $fileName = $this->_storePath . '/' . $reportId . '.'
-            . $visibility . $this->_getReportExt();
-        if (realpath($fileName) == '' || !is_readable($fileName)) {
-            require_once 'Uploader/Exception.php';
-            throw new Uploader_Exception(
-                'The specified report doesn\'t exist.'
-            );
+        /**
+         * @var DOMNodeList $nodes
+         * @var DOMNodeList $anchorNodes
+         * @var DOMNodeList $subjectNodes
+         */
+        $htmlReport = iconv('UTF-8', 'ISO-8859-1', $htmlReport);
+        $domDocument = new DOMDocument();
+        @$domDocument->loadHTML($htmlReport);
+        $xpath = new DOMXPath($domDocument);
+        $nodes = $xpath->evaluate("//div[@class='MessageContainer']");
+        $extractedReport = '';
+        if ($nodes->length == 1) {
+            $report = $nodes->item(0);
+            $anchorNodes = $xpath->evaluate("//a[@title='zurück zur Übersicht']");
+            if ($anchorNodes->length > 0) {
+                $anchorNodes->item(0)->parentNode->removeChild($anchorNodes->item(0));
+                $anchorNodes = $xpath->evaluate("//img[@class='MessageButtons']/../a", $report);
+                $actionCell = $anchorNodes->item(0)->parentNode;
+                while ($actionCell->hasChildNodes()) {
+                    $actionCell->removeChild($actionCell->firstChild);
+                }
+                $extractedReport = $domDocument->saveXML($nodes->item(0));
+
+                $subjectNodes = $xpath->evaluate("//td[@class='MessageTableCell']/a");
+                $this->_subject = $domDocument->saveXML($subjectNodes->item(0));
+                $this->_subject = str_replace(
+                    array('<a', '</a', '&#13;'),
+                    array('<span', '</span', ''),
+                    $this->_subject
+                );
+                $extractedReport = str_replace(
+                    array('<a', '</a', '&#13;'),
+                    array('<span', '</span', ''),
+                    $extractedReport
+                );
+                $this->_extracted = $extractedReport;
+                $this->_id = md5($extractedReport);
+            }
         }
-        
-        $this->_reportId = $reportId;
-        $filePointer = fopen(
-            $this->_compressionMethod . '://' . $fileName,
-            'r'
-        );
-        $this->_report = '';
-        while (!feof($filePointer)) {
-            $this->_report .= fread($filePointer, 4096);
-        }
-        $this->_visibility = $visibility;
-        $this->_meta = unserialize(
-            file_get_contents(
-                $this->_storePath . '/' . $reportId . '.' . $visibility .
-                    '.meta'
-            )
-        );
-        fclose($filePointer);
+        return $extractedReport;
     }
-    
-    public function save()
+
+    /**
+     * @param string $comment
+     */
+    public function setComment($comment)
     {
-        if ($this->_report === null) {
-            require_once 'Uploader/Exception.php';
-            throw new Uploader_Exception(
-                'No report to save. Set or load a report first.'
-            );
-        }
-        
-        if ($this->_reportId === null) {
-            $this->_reportId = md5($this->_report);
-        }
-        $visibilityMap = $this->_switchArrayKeys(self::$visibilityMap);
-        $fileName = $this->_storePath . '/' . $this->_reportId
-            . '.' . $visibilityMap[$this->_visibility] . $this->_getReportExt();
-        $fileName = str_replace('\\', '/', $fileName);
-        if (file_exists($fileName)) {
-            return $this->_reportId;
-        }
-        $filePointer = fopen(
-            $this->_compressionMethod . '://' . $fileName,
-            'w+'
-        );
-        fwrite($filePointer, $this->_report);
-        fclose($filePointer);
-        
-        file_put_contents(
-            $this->_storePath . '/' . $this->_reportId . '.'
-                . $visibilityMap[$this->_visibility] . '.meta',
-            serialize($this->_meta)
-        );
-        return $this->_reportId;
+        $this->_comment = $comment;
     }
-    
-    public function getReport()
+
+    /**
+     * @return string
+     */
+    public function getComment()
     {
-        return $this->_report;
+        return $this->_comment;
     }
-    
-    public function setReport($report)
+
+    /**
+     * @param int $creationTime
+     */
+    public function setCreationTime($creationTime)
     {
-        $this->_report = (string) $report;
+        $this->_creationTime = $creationTime;
     }
-    
-    public function parseSource($html, $options = array())
+
+    /**
+     * @return int
+     */
+    public function getCreationTime()
     {
-        if (
-            strpos(
-                $html,
-                '../pix/skins/default/cnt/reiter_1_aktiv.gif'
-            ) === false
-        ) {
-            return false;
-        }
-        $html = str_replace("\r\n", "\n", $html);
-        $start = strpos($html, '<div class="MessageContainer">');
-        $end = strrpos($html, '</div>');
-        $completeReport = substr($html, $start, $end - $start);
-        $baseUrl = Uploader_Controller_Front::getInstance()->getBaseUrl();
-        $completeReport = str_replace(
-            '../pix/skins/default/cnt',
-            $baseUrl . '/images',
-            $completeReport
-        );
-        $completeReport = preg_replace(
-            '/<a[^>]*class="SystemGfxButton[^"]*">[^<]*<\/a>/s',
-            '',
-            $completeReport
-        );
-        $completeReport = preg_replace(
-            '/<a[^>]*class="([^"]*)">([^<]*)<\/a>/s',
-            '<span class="$1">$2</span>',
-            $completeReport
-        );
-        $completeReport = preg_replace(
-            '/<a[^>]*>(<img[^>]*>[^<]*)<\/a>/s',
-            '$1',
-            $completeReport
-        );
-        preg_match(
-            '/<span class="Message[^"]*">([^<]*)<\/span>/s',
-            $completeReport,
-            $subject
-        );
-        preg_match(
-            '/(?<d>\d+)\.(?<m>\d+)\.(?<Y>\d+)' . "\n" . 
-                '(?<H>\d+):(?<i>\d+):(?<s>\d+)/s',
-            $completeReport,
-            $time
-        );
-        preg_match(
-            '/<td class="MessageTableCell" width="185" valign="top">' .
-                '(?<sender>[^<]*)<br><div style="font: 10px Verdana;">' .
-                '(?<planet>.*) \((?<G>\d):(?<S>\d+):(?<P>\d+)\)<\/div><\/td>/',
-            $completeReport,
-            $sender
-        );
-        $this->_meta = array(
-            'subject' => $subject[1],
-            'timestamp' => mktime(
-                $time['H'],
-                $time['i'],
-                $time['s'],
-                $time['m'],
-                $time['d'],
-                $time['Y']
-            ),
-            'sender' => $sender['sender'],
-            'planet' => $sender['planet'],
-            'coords' => array($sender['G'], $sender['S'], $sender['P']),
-        );
-        $this->setReport($completeReport);
+        return $this->_creationTime;
     }
-    
+
+    /**
+     * @param string $extracted
+     */
+    public function setExtracted($extracted)
+    {
+        $this->_extracted = $extracted;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtracted()
+    {
+        return $this->_extracted;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId($id)
+    {
+        $this->_id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    /**
+     * @param string $visibility
+     */
     public function setVisibility($visibility)
     {
         $this->_visibility = $visibility;
     }
-    
-    public function getVisibility($returnAsString = false)
+
+    /**
+     * @return string
+     */
+    public function getVisibility()
     {
-        if ($returnAsString) {
-            $visibilityMap = $this->_switchArrayKeys(self::$visibilityMap);
-            return $visibilityMap[$this->_visibility];
-        }
         return $this->_visibility;
     }
-    
-    public function getMetaData()
+
+    /**
+     * @param string $subject
+     */
+    public function setSubject($subject)
     {
-        return $this->_meta;
+        $this->_subject = $subject;
     }
-    
-    private function _getReportExt()
+
+    /**
+     * @return string
+     */
+    public function getSubject()
     {
-        return $this->_compressionMap[$this->_compressionMethod];
+        return $this->_subject;
     }
-    
-    private function _switchArrayKeys(array $array)
-    {
-        $result = array();
-        foreach ($array as $key => $value)
-        {
-            $result[$value] = $key;
-        }
-        return $result;
-    }
+
 }

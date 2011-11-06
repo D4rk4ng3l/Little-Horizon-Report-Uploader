@@ -1,0 +1,75 @@
+<div class="MessageContainer">
+    <div class="MessageContainerHeadBox">
+        <div class="MessageContainerHead">Versionsinformation</div>
+    </div>
+    <div class="MessageContainerBodyBox">
+        <table cellpadding="0" cellspacing="0" border="0" class="MessageTable" width="608">
+            <tr>
+                <td class="MessageTableCellLeft" style="width:110px;">Produkt:</td>
+                <td class="MessageTableCell">Horizon Bericht Uploader</td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft">Version:</td>
+                <td class="MessageTableCell"><?php echo Uploader_Version::VERSION; ?> vom <?php echo Uploader_Version::DATE_LONG; ?></td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft">Copyright:</td>
+                <td class="MessageTableCell">&copy; 2011 by D4rk4ng3l</td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft">Lizenz:</td>
+                <td class="MessageTableCell">General Public License (GPL)</td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft" align="left" valign="top">Design:</td>
+                <td class="MessageTableCell">Steffan "Dyhani" Marx<br />
+                    Lissy "Princess" Mödl<br />
+                    Stefan D4rk4ng3l Krenz (Anpassungen)</td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft">Ben&ouml;tigt:</td>
+                <td class="MessageTableCell">PHP ab Version 5.2 mit dem Modul bzip2 (Bibliothek bzip2/libbzip2)</td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft" colspan="2"><a class="SystemGfxButton Bold Green light100" href="<?php echo $this->baseUrl(); ?>/gpl.txt" target="_blank">Lizenz</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br/>
+<?php
+foreach($this->download['archives'] as $archId => $download) {
+    $downloadFile = sprintf("%s/%s.%s", $this->download['sourcePath'], $this->download['baseName'], $download['suffix']);
+    $buttonClass = 'Grey';
+    $downloadUrl = "#";
+    $downloadSize = "Datei fehlt! Ein Download ist nicht möglich.";
+    if (file_exists($downloadFile)) {
+        $downloadUrl = $this->baseUrl() . "/index/download/arch/" . $archId . "/";
+        $downloadSize = $this->formatBytes(filesize($downloadFile), 'long', 2, ',', "'");
+        $buttonClass = 'Green';
+    }
+?>
+<div class="MessageContainer">
+    <div class="MessageContainerHeadBox">
+        <div class="MessageContainerHead">Download - <?php echo $download['title']; ?></div>
+    </div>
+    <div class="MessageContainerBodyBox">
+        <table cellpadding="0" cellspacing="0" border="0" class="MessageTable" width="608">
+            <tr>
+                <td class="MessageTableCellLeft" style="width:110px;">Dateiname:</td>
+                <td class="MessageTableCell"><?php echo $this->download['baseName'] . '.' . $download['suffix']; ?></td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft">Dateigröße:</td>
+                <td class="MessageTableCell"><?php echo $downloadSize; ?></td>
+            </tr>
+            <tr>
+                <td class="MessageTableCellLeft" colspan="2">
+                    <a class="SystemGfxButton Bold <?php echo $buttonClass; ?> light100" href="<?php echo $downloadUrl; ?>">Download</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<br/>
+<?php } ?>

@@ -1,0 +1,694 @@
+/* Cascading Style Sheet (CSS 2)-Definitionen für http://horizon.building-better-worlds.org/ */
+
+/****************************************/
+/*										*/
+/* Stand:		Febaruar 2004			*/
+/* Version:		1.0						*/
+/* Copyright:	Steffen "Dhyani" Marx	*/
+/*				Lissy "Princess" Mödl	*/
+/*										*/
+/****************************************/
+
+/* Getestet:										*/
+/*		- Validierung über www.w3c.org				*/
+/*		- MS IE 6.0 auf Windows XP					*/
+/*		- Netscape 7.2								*/
+/*		- Mozilla 1.5								*/
+/*		- Firefox 0.8								*/
+
+/* Bekannte Bugs:									*/
+/*		- Mozilla/Firefox haben ein Problem mit der Hintergrundgrafik				*/
+/*		  (Hintergrundgrafik wird nicht fortgesetzt, wenn man nach unten scrollt)	*/
+
+/* Unbekannte Bugs:									*/
+/*		- Auf einer Firefox-Version 0.8 gibt es Darstellungsfehler bei den			*/
+/*		  kombinierten Bild-Text-Modulen (vollkommen falsche Darstellung); Ursache	*/
+/*		  nicht bekannt																*/
+
+/* Bei Nutzung von Inhalten dieser Datei (vollstaendig oder in Teilen) sind			*/
+/* folgende Zeilen UNBEDINGT mit anzugeben:											*/
+
+/* (c) 2004 by Steffen "Dhyani" Marx   dhyan@building-better-worlds.org for			*/
+/* "Horizon"  (http://horizon.building-better-worlds.org/), the ultimate MMOG		*/
+/* in the Web!  Visit now & enjoy! :o)												*/
+
+
+
+/*************************************************************************************/
+
+/* Definitionen fuer den Zierbereich (alles oberhalb von Navigation und Content */
+
+.Ornament
+{
+	background-image: url(../pix/horizon_ornament.jpg);
+	background-repeat: no-repeat;
+	background-color: #000000;
+}
+
+.SystemInformation
+{
+	font: bold 12px Verdana;
+
+	border-left: solid #FFFFFF 1px;
+	border-bottom: solid #929191 1px;
+
+	margin: 0px;
+	margin-bottom: 6px;
+
+	padding: 0px;
+	padding-left: 4px;
+	padding-bottom: 4px;
+}
+
+/* Definitionen fuer den HTML-Body (Standard-Definition von Farben und Abstaenden) */
+
+/*BODY
+{
+	background-color: #000000;
+	color: #FFFFFF;
+
+	margin: 0px;
+	padding: 0px;
+}*/
+
+/* Definition des Hauptcontainers, der den gesamten Seiteninhalt aufnimmt */
+
+.MainContainer
+{
+	background-image: url(../pix/horizon_bg.jpg);
+	background-repeat: repeat;
+	/*background-color: #495465;*/
+	margin: 0px;
+	padding: 0px;
+	width: 785px;
+	height: 100%;
+}
+
+/* Definition des Navigationscontainers, der die gesamte Navigation aufnimmt */
+
+.NavContainer
+{
+	float: left;
+
+	font: bold 70% Verdana;
+	text-decoration: none;
+
+	width: 136px;
+}
+
+/* Definition der Navigations-Hauptpunkte */
+
+.NavFirst
+{
+	
+	border-left: solid #FFFFFF 1px;
+	border-bottom: solid #929191 1px;
+	border-right: solid #929191 1px;
+	background-color: #EBECEC;
+	margin-left: 8px;
+	width: 127px;
+	line-height: 20px;
+}
+
+.NavFirstText
+{
+	font: bold 93% Verdana;
+	color: #000000;
+
+	padding: 3px;
+	padding-left: 5px;
+}
+
+/* Definition der Navigations-Unterpunkte */
+
+.NavSecond
+{
+	background-color: #6D7684;
+	border-bottom: solid #E2E4E6 1px;
+	border-left: solid #B6BBC1 1px;
+	border-right: solid #B6BBC1 1px;
+
+	margin-left: 20px;
+	width: 114px;
+	line-height: 20px;
+}
+
+.NavSecondText
+{
+	font: bold 93% Verdana;
+	color: #EFF0F0;
+	padding: 3px;
+
+	padding-left: 5px;
+}
+
+.navLink
+{
+	width: 100%;
+	display: block;
+	color: #EFF0F0;
+}
+
+/* Definition des Inhalts-Containers */
+
+.ContentContainer
+{
+	float: left;
+	width: 448px;
+	margin-left: 16px;
+}
+
+/* Definition des Modules */
+
+.ModuleContainer
+{
+	border-bottom: solid #3C4452 1px;
+	border-top: solid #929BA6 1px;
+	border-left: solid #929BA6 1px;
+	border-right: solid #3C4452 1px;
+
+	margin-bottom: 8px;
+}
+
+/* Modulüberschrift */
+
+.ModuleHead
+{
+	background-image: url(../pix/horizon_arrow.gif);
+	background-repeat: no-repeat;
+	background-color: #4C5562;
+	border-bottom: solid #282D35 1px;
+	font: normal 12px Verdana;
+	color: #FFFFFF;
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 15px;
+}
+
+/* Modulkörper mit führender Linie */
+
+.ModuleBody_with_line
+{
+	border-top: solid #6B7482 1px;
+	background-color: #5A6372;
+}
+
+/* Modulkörper ohne führender Linie */
+
+.ModuleBody_without_line
+{
+	background-color: #5A6372;
+}
+
+/* Modulunterüberschrift */
+
+.ModuleSubhead
+{
+	background-image: url(../pix/horizon_quadrat.gif);
+	background-repeat: no-repeat;
+
+	font: bold 12px Verdana;
+	color: #FFFFFF;
+
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 15px;
+}
+
+/* Modulkörper */
+
+.ModuleText
+{	
+	font: normal 11px Verdana;
+	color: #FFFFFF;
+
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 8px;
+	padding-bottom: 8px;
+	line-height: 14px;
+
+}
+
+.ModuleTextAnnotation
+{
+	font: normal 11px Verdana;
+	color: #BDC1C7;
+	padding-top: 40px;
+	padding-left: 23px;
+	padding-right: 8px;
+	padding-bottom: 8px;
+	line-height: 14px;
+}
+
+/* Definition für grosse Grafiken */
+
+.ModulePicLarge
+{
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 21px;
+	padding-bottom: 8px;
+}
+
+.Picture
+{
+	border: solid #FFFFFF 1px;
+	background-color: #5A6372;
+}
+
+.PictureDesc
+{
+	border: solid #ACB1B9 1px;
+	background-color: #ACB1B9;
+	font: normal 10px Verdana;
+	color: #495465;
+	padding: 4px;
+	padding-top: 3px;
+}
+
+/* Definition für mittlere und kleine Grafiken */
+
+.ModulePicSmall
+{
+	padding-top: 8px;
+	padding-left: 23px;
+	padding-right: 21px;
+	padding-bottom: 8px;
+}
+
+/* Definition für Fließtext um kleine und mittlere Grafiken */
+
+.FloatingText
+{
+	font: normal 11px Verdana;
+	color: #FFFFFF;
+
+	padding: 4px;
+	margin-top: 0px;
+	padding-top: 0px;
+	padding-left: 0px;
+	padding-bottom: 4px;
+	line-height: 14px;
+}
+
+/* Definition für Tabellen */
+
+.ModuleTable
+{
+	border-bottom: solid #3C4452 1px;
+	border-top: solid #929BA6 1px;
+	border-left: solid #929BA6 1px;
+	border-right: solid #3C4452 1px;
+	width: 446px;
+	margin-bottom: 8px;
+}
+
+.Tablehead
+{
+	background-image: url(../pix/horizon_arrow.gif);
+	background-repeat: no-repeat;
+	background-color: #4C5461;
+	border-bottom: solid #282D35 1px;
+
+	font: normal 12px Verdana;
+	color: #FFFFFF;
+
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 15px;
+}
+
+.Tablerow_light_left
+{
+	background-color: #6B7380;
+	border-top: solid #979DA6 1px;
+	border-right: solid #565C66 1px;
+	border-bottom: solid #4A5059 1px;
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 8px;
+	font: normal 11px Verdana;
+	color: #FFFFFF;
+	line-height: 14px;
+}
+
+.Tablerow_light
+{
+	background-color: #6B7380;
+	border-top: solid #979DA6 1px;
+	border-left: solid #888F99 1px;
+	border-right: solid #565C66 1px;
+	border-bottom: solid #4A5059 1px;
+	padding: 4px;
+	padding-left: 8px;
+	padding-right: 8px;
+	font: normal 11px Verdana;
+	color: #FFFFFF;
+	line-height: 14px;
+}
+
+.Tablerow_dark_left
+{
+	background-color: #596372;
+	border-top: solid #8C929D 1px;
+	border-right: solid #565C66 1px;
+	border-bottom: solid #4A5059 1px;
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 8px;
+	font: normal 11px Verdana;
+	color: #FFFFFF;
+	line-height: 14px;
+}
+
+.Tablerow_dark
+{
+	background-color: #596372;
+	border-top: solid #8C929D 1px;
+	border-left: solid #888F99 1px;
+	border-right: solid #565C66 1px;
+	border-bottom: solid #4A5059 1px;
+	padding: 4px;
+	padding-left: 8px;
+	padding-right: 8px;
+	font: normal 11px Verdana;
+	color: #FFFFFF;
+	line-height: 14px;
+}
+
+.Tablerow_head
+{
+	background-color: #4C5561;
+	border-top: solid #828891 1px;
+	border-right: solid #3D444E 1px;
+	border-bottom: solid #353B44 1px;
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 8px;
+	font: normal 11px Verdana;
+	color: #FFFFFF;
+	line-height: 14px;
+}
+
+.Tablelink
+{
+	color: #EFF0F0;
+}
+
+.Tablerow_formtext
+{
+	background-color: #596372;
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 8px;
+	font: normal 11px Verdana;
+	color: #FFFFFF;
+	line-height: 14px;
+}
+
+.Tablerow_formfield
+{
+
+	background-color: #596372;
+	padding: 4px;
+	padding-left: 0px;
+	padding-right: 8px;
+}
+
+.Tablerow_formtext_right
+{
+	background-color: #596372;
+	padding: 4px;
+	padding-right: 8px;
+	font: normal 11px Verdana;
+	color: #FFFFFF;
+	line-height: 14px;
+}
+
+.Tablerow_formfield_left
+{
+
+	background-color: #596372;
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 8px;
+}
+
+/* Definitionen für Formularelemente */
+
+.FORM
+{
+	border-top: solid #6A7482 1px;
+	background-color: #596372;
+	padding-bottom: 8px;
+	padding-top: 8px;
+	margin: 0px;
+}
+
+.inputfield
+{
+	font: bold 11px Verdana;
+	color: #E9E8E4;
+	border: 1px solid #ADB1B9;
+	background-color: #242E37;
+	height: 18px;
+	width: 272px;
+}
+
+.inputbutton
+{
+	font: bold 11px Verdana;
+	color: #000000;
+	border: 1px solid #E5E2DB;
+	background-color: #E9E8E4;
+	height: 18px;
+	width: 180px;
+	margin-top: 8px;
+}
+
+.textarea
+{
+	font: bold 11px Verdana;
+	color: #E9E8E4;
+	border: 1px solid #ADB1B9;
+	background-color: #242E37;
+	width: 272px;
+}
+
+/* Aufzählungslisten */ 
+
+UL
+{
+	margin-top: 8px;
+	margin-right: 8px;
+	margin-bottom: 8px;
+}
+
+LI
+{
+	font: normal 11px Verdana;
+	line-height: 14px;
+	color: #BC0000;
+	margin-bottom: 8px;
+}
+
+.list
+{
+	color: #BDC1C7;
+}
+
+/* Gesamtcontainer für Marginalspalte */
+
+.MarginContainer
+{
+	float: left;
+	width: 162px;
+
+	margin-left: 8px;
+}
+
+.MarginModule
+{
+	border-bottom: solid #3C4452 1px;
+	border-top: solid #929BA6 1px;
+	border-left: solid #929BA6 1px;
+	border-right: solid #3C4452 1px;
+	
+	margin-bottom: 8px;
+}
+
+/* Marginalüberschrift */
+
+.MarginModuleHead
+{
+	background-image: url(../pix/horizon_arrow.gif);
+	background-repeat: no-repeat;
+	background-color: #4C5562;
+	border-bottom: solid #282D35 1px;
+	padding: 4px;
+	padding-left: 23px;
+	padding-right: 15px;
+	font: normal 12px Verdana;
+	color: #FFFFFF;
+}
+
+
+.MarginModuleBody_once
+{
+	border-top: solid #6B7482 1px;
+	background-color: #5A6372;
+	padding-bottom: 8px;
+}
+
+.MarginModuleBody_more
+{
+	border-top: solid #6B7482 1px;
+	background-color: #5A6372;
+	padding-bottom: 4px;
+}
+
+.MarginModuleBody_without_line
+{
+	background-color: #5A6372;
+	padding-top: 2px;
+	padding-bottom: 8px;
+}
+
+/* Textbox für Marginalspalte */
+
+.MarginTextbox
+{
+	margin: 8px;
+	margin-bottom: 0px;
+	border-bottom: solid #ACB1B9 1px;
+	border-top: solid #ACB1B9 1px;
+	border-left: solid #ACB1B9 1px;
+	border-right: solid #ACB1B9 1px;
+	background-color: #4C5562;
+}
+
+/* Überschrift in Marginaltextbox */
+
+.MarginTextboxhead
+{
+	padding: 8px;
+	padding-bottom: 0px;
+	font: bold 11px Verdana;
+	color: #FFFFFF;
+}
+
+/* Text in Marginaltextbox */
+
+.MarginTextboxtext
+{
+	padding: 8px;
+	padding-top: 0px;
+	padding-bottom: 8px;
+	font: normal 11px Verdana;
+	color: #FFFFFF;
+}
+
+/* Marginalgrafikbox */
+
+.MarginPicbox
+{
+	margin: 8px;
+	margin-bottom: 0px;
+	border-bottom: solid #ACB1B9 1px;
+	border-top: solid #ACB1B9 1px;
+	border-left: solid #ACB1B9 1px;
+	border-right: solid #ACB1B9 1px;
+	background-color: #4C5562;
+}
+
+.MarginLink
+{
+	color: #EFF0F0;
+}
+
+/* Text in MarginalGrafikbox */
+
+.MarginPicboxtext
+{
+	border-top: solid #ACB1B9 1px;
+	padding: 8px;
+	font: normal 11px Verdana;
+	background-color: #4C5562;
+	color: #ACB1B9;
+}
+
+/* Hyperlinks */
+
+a
+{
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: underline;
+}
+
+/* Login-Bildschirm */
+
+.LoginNavContainer
+{
+	float: left;
+
+	font: bold 70% Verdana;
+	text-decoration: none;
+
+	width: 136px;
+}
+
+.LoginContainer
+{
+	background-image: url(../../game/pix/background/login.jpg);
+	background-repeat: no-repeat;
+	background-position: left;
+
+	float: left;
+	width: 649px;
+	height: 607px;
+
+}
+
+.LoginForm
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+.LoginInputName
+{
+	font: bold 11px Verdana;
+	color: #FFFFFF;
+	border: 1px solid #FFFFFF;
+	background-color: #414141;
+
+	height: 18px;
+	width: 87px;
+}
+
+.Loginbutton
+{
+	font: bold 11px Verdana;
+	color: #000000;
+	border-top: 1px solid #FFFFFF;
+	border-left: 1px solid #FFFFFF;
+	border-right: 1px solid #656565;
+	border-bottom: 1px solid #656565;
+	background-color: #E9E8E4;
+	height: 18px;
+	width: 87px;
+}
+
+.Login_enh
+{
+	font: bold 11px Verdana;
+	display: block;
+	width: 138px;
+	text-align: center;
+	cursor: help;
+}

@@ -1,25 +1,26 @@
 <?php
+
 // Define path to application directory
-defined('APPLICATION_PATH') || define(
-    'APPLICATION_PATH',
-    realpath(dirname(__FILE__) . '/../application')
+defined('APPLICATION_PATH')
+    || define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
+
+// Define application environment
+defined('APPLICATION_ENV')
+    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+
+// Ensure library/ is on include_path
+set_include_path(implode(PATH_SEPARATOR, array(
+    realpath(APPLICATION_PATH . '/../library'),
+    get_include_path(),
+)));
+
+/** Zend_Application */
+require_once 'Zend/Application.php';
+
+// Create application, bootstrap, and run
+$application = new Zend_Application(
+    APPLICATION_ENV,
+    APPLICATION_PATH . '/configs/application.ini'
 );
-
-set_include_path(
-    implode(
-        PATH_SEPARATOR,
-        array(
-            realpath(APPLICATION_PATH . '/../library'),
-            get_include_path(),
-        )
-    )
-);
-
-include 'Uploader/Autoloader.php';
-$autoloader = Uploader_Autoloader::getInstance();
-$autoloader->registerNamespace('Uploader_');
-
-$config = new Uploader_Config_Ini(APPLICATION_PATH . '/config/application.ini');
-$application = new Uploader_Application($config);
-
-$application->run();
+$application->bootstrap()
+            ->run();

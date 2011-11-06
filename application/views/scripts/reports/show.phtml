@@ -1,0 +1,51 @@
+<?php
+/**
+ * @var Zend_View $this
+ */
+if (!$this->report instanceof Uploader_Report) {
+?>
+<div class="MessageContainer Error">
+    <div class="MessageContainerHeadBox">
+        <div class="MessageContainerHead">Fehler</div>
+    </div>
+    <div class="MessageContainerBodyBox">
+        <div class="MessageTableCellLeft">Ein Bericht mit der angegebenen ID existiert nicht.</div>
+    </div>
+</div>
+<br/>
+<?php } else {
+    /**
+     * @var Uploader_Report $report
+     */
+    $report = $this->report;
+    $comment = $report->getComment();
+?>
+    <div class="MessageContainer">
+        <div class="MessageContainerHeadBox">
+            <div class="MessageContainerHead">URL zu diesem Bericht</div>
+        </div>
+        <div class="MessageContainerBodyBox">
+            <div class="MessageTableCellLeft" style="padding: 3px 6px;height:20px;"><input type="text" class="AccInputfield_long" style="width:595px;" value="<?php echo $this->serverUrl() . $this->baseUrl(); ?>/reports/show/id/<?php echo $report->getId(); ?>/" onfocus="this.select();"/></div>
+        </div>
+    </div>
+    <br/>
+<?php if (!empty($comment)) { ?>
+    <div class="MessageContainer">
+        <div class="MessageContainerHeadBox">
+            <div class="MessageContainerHead">Kommentar</div>
+        </div>
+        <div class="MessageContainerBodyBox">
+            <div class="MessageTableCellLeft" style="padding: 3px 6px;"><?php echo $this->escape($comment); ?></div>
+        </div>
+    </div>
+    <br/>
+<?php } ?>
+<div class="MessageContainer">
+    <div class="MessageContainerHeadBox">
+        <div class="MessageContainerHead">Bericht - Hochgeladen am <?php echo date("d.m.Y", $report->getCreationTime()); ?></div>
+    </div>
+    <div class="MessageContainerBodyBox">
+        <?php echo $report->getExtracted(); ?>
+    </div>
+</div>
+<?php } ?>
